@@ -1,16 +1,16 @@
-# react-overscroll
+# react-text-overscroll
 
 > React component to reveal text hidden by overflow:hidden
 
-[![NPM](https://img.shields.io/npm/v/react-overscroll.svg)](https://www.npmjs.com/package/react-overscroll) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-text-overscroll.svg)](https://www.npmjs.com/package/react-text-overscroll) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Demo
-[https://astanciu.github.io/react-overscroll](https://astanciu.github.io/react-overscroll)
+[https://astanciu.github.io/react-text-overscroll](https://astanciu.github.io/react-text-overscroll)
 
 ## Install
 
 ```bash
-npm install --save react-overscroll
+npm install --save react-text-overscroll
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ npm install --save react-overscroll
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'react-overscroll'
+import MyComponent from 'react-text-overscroll'
 
 class Example extends Component {
   render () {

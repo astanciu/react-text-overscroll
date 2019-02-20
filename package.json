@@ -1,11 +1,11 @@
 {
-  "name": "react-overscroll",
+  "name": "react-text-overscroll",
   "version": "0.1.0",
   "description": "React component to reveal text hidden by overflow:hidden",
   "author": "Alex Stanciu (http://github.com/astanciu)",
   "license": "MIT",
-  "repository": "astanciu/react-overscroll",
-  "homepage": "https://astanciu.github.io/react-overscroll",
+  "repository": "astanciu/react-text-overscroll",
+  "homepage": "https://astanciu.github.io/react-text-overscroll",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -58,5 +58,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {}
 }

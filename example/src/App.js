@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import OverScroll from 'react-overscroll'
+import OverScroll from 'react-text-overscroll'
 
 // import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter"
@@ -21,7 +21,7 @@ export default class App extends Component {
     const text = "The quick brown fox jumps over the lazy dog"
     return (
       <div className="page">
-        <h1>react-over-scroll</h1>
+        <h1>react-text-overscroll</h1>
         <p>Instead of cutting off overflow'ed text with ellipsis, this components will scroll the text when the mouse moves</p>
         <p>Example:</p>
           <div className="test-container">

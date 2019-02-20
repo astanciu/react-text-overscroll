@@ -1,6 +1,6 @@
 {
-  "name": "react-overscroll-example",
-  "homepage": "https://astanciu.github.io/react-overscroll",
+  "name": "react-text-overscroll-example",
+  "homepage": "https://astanciu.github.io/react-text-overscroll",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -8,7 +8,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-overscroll": "link:..",
+    "react-text-overscroll": "link:..",
     "react-scripts": "^1.1.4",
     "react-syntax-highlighter": "^10.1.3"
   },

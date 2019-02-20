@@ -6475,10 +6475,6 @@ react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.2.tgz#09891d324cad1cb0c1f2d91f70a71a4bee34df0f"
   integrity sha512-D+NxhSR2HUCjYky1q1DwpNUD44cDpUXzSmmFyC3ug1bClcU/iDNy0YNn1iwme28fn+NFhpA13IndOd42CrFb+Q==
 
-"react-overscroll@link:..":
-  version "0.0.0"
-  uid ""
-
 react-scripts@^1.1.4:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-1.1.5.tgz#3041610ab0826736b52197711a4c4e3756e97768"
@@ -6535,6 +6531,10 @@ react-syntax-highlighter@^10.1.3:
     lowlight "~1.9.1"
     prismjs "^1.8.4"
     refractor "^2.4.1"
+
+"react-text-overscroll@link:..":
+  version "0.0.0"
+  uid ""
 
 react@^16.4.1:
   version "16.8.2"
