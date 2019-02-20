@@ -1,8 +1,27 @@
-/* add css styles here (optional) */
+.container {
+  /* border: 1px solid yellow; */
+  white-space: nowrap;
+  position: relative;
+  cursor: ew-resize;
+}
 
-.test {
+.innerParent {
+  /* border: 1px solid blue; */
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ellipsis::after {
+    /* border: 1px solid #4b00ff; */
+    content: "...";
+    right: 0px;
+    top: 1px;
+    position: absolute;
+    width: 12px;
+    background-color: #ffffff;
+    /* display: none; */
+}
+
+.child {
+  /* border: 1px dashed ; */
   display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
 }
