@@ -1,24 +1,35 @@
 .container {
   /* border: 1px solid yellow; */
-  white-space: nowrap;
+  /* white-space: nowrap; */
   position: relative;
-  cursor: ew-resize;
+  /* cursor: ew-resize; */
 }
 
 .innerParent {
   /* border: 1px solid blue; */
   overflow: hidden;
   white-space: nowrap;
+
+  white-space: nowrap;
+  position: relative;
+  cursor: ew-resize;
 }
-.ellipsis::after {
-    /* border: 1px solid #4b00ff; */
+
+/* .ellipsis::after {
     content: "...";
     right: 0px;
     top: 1px;
     position: absolute;
     width: 12px;
     background-color: #ffffff;
-    /* display: none; */
+} */
+
+.ellipsis {
+  right: 0px;
+  top: 1px;
+  position: absolute;
+  width: 12px;
+  background-color: #ffffff;
 }
 
 .child {

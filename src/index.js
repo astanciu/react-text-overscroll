@@ -18,7 +18,7 @@ export default class Scroll extends React.Component {
   componentDidMount() {
     this.getWidths();
     if (this.widthDiff > 0) {
-      this.container.current.className = "container ellipsis";
+      this.setState({showEllipsis: true})
     }
   }
 
@@ -60,9 +60,11 @@ export default class Scroll extends React.Component {
     );
 
     if (this.offset >= this.widthDiff - this.endGap) {
-      this.container.current.className = styles.container;
+      this.setState({showEllipsis: false})
+      // this.container.current.className = styles.container;
     } else {
-      this.container.current.className = styles.container + ' ' + styles.ellipsis;
+      this.setState({showEllipsis: true})
+      // this.container.current.className = styles.container + ' ' + styles.ellipsis;
     }
   };
 
@@ -76,25 +78,38 @@ export default class Scroll extends React.Component {
   }
 
   render() {
+    const elStyles = {backgroundColor: this.props.bgColor || "#fff"}
+    const parentStyles = {}
+    const height = this.props.height
+    if (height){
+      elStyles.lineHeight = height;
+      elStyles.height = height;
+      parentStyles.lineHeight = height;
+      parentStyles.height = height;
+    }
     return (
-      <div
-        id="container"
-        className={styles.container}
-        onMouseOut={this.onMouseOut}
-        ref={this.container}
-      >
+
         <div
-          id="scroverflow-inner-parent"
-          className={styles.innerParent}
-          ref={this.parent}
-          onMouseOver={this.onMouseOver}
-          onMouseMove={this.onMouseMove}
+          id="container"
+          className={styles.container}
+          onMouseOut={this.onMouseOut}
+          ref={this.container}
         >
-          <div id="scroverflow-child" className={styles.child} ref={this.child}>
-            {this.props.children}
+          <div
+            id="scroverflow-inner-parent"
+            className={styles.innerParent}
+            style={parentStyles}
+            ref={this.parent}
+            onMouseOver={this.onMouseOver}
+            onMouseMove={this.onMouseMove}
+          >
+            <div id="scroverflow-child" className={styles.child} ref={this.child}>
+              {this.props.children}
+            </div>
           </div>
+          {this.state.showEllipsis && <span className={styles.ellipsis} style={elStyles}>...</span>}
         </div>
-      </div>
+
     );
   }
 }
