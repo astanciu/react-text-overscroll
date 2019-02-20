@@ -4,6 +4,9 @@
 
 [![NPM](https://img.shields.io/npm/v/react-overscroll.svg)](https://www.npmjs.com/package/react-overscroll) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+## Demo
+[https://astanciu.github.io/react-overscroll](https://astanciu.github.io/react-overscroll)
+
 ## Install
 
 ```bash
