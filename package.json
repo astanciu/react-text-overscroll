@@ -1,6 +1,6 @@
 {
   "name": "react-text-overscroll",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React component to reveal text hidden by overflow:hidden",
   "author": "Alex Stanciu (http://github.com/astanciu)",
   "license": "MIT",

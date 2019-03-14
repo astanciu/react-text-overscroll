@@ -1,27 +1,16 @@
 .container {
-  border: 1px solid yellow;
-  /* white-space: nowrap; */
+  /* border: 1px solid yellow; */
   position: relative;
-  /* cursor: ew-resize; */
 }
 
 .innerParent {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   overflow: hidden;
   white-space: nowrap;
 
   white-space: nowrap;
   position: relative;
 }
-
-/* .ellipsis::after {
-    content: "...";
-    right: 0px;
-    top: 1px;
-    position: absolute;
-    width: 12px;
-    background-color: #ffffff;
-} */
 
 .ellipsis {
   right: 0px;
@@ -32,6 +21,6 @@
 }
 
 .child {
-  border: 1px red dashed ;
+  /* border: 1px red dashed ; */
   display: inline-block;
 }
