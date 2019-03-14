@@ -25,7 +25,11 @@ export default class App extends Component {
         <p>Instead of cutting off overflow'ed text with ellipsis, this components will scroll the text when the mouse moves</p>
         <p>Example:</p>
           <div className="test-container">
-            <OverScroll bgColor="#484f5d" height="30px">{text}</OverScroll>
+            <OverScroll  height="30px">{text}</OverScroll>
+          </div>
+
+          <div className="test-container">
+            <OverScroll  height="30px">Short</OverScroll>
           </div>
 
         <div className="code">

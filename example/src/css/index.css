@@ -16,12 +16,13 @@ body {
 
 .test-container {
   border: 1px solid #496486;
-  width: 100px;
+  width: 150px;
   /* display: inline-block;
   height: 20px; */
   padding: 5px;
   margin: auto;
   border-radius: 3px;
+  text-align: left;
 }
 
 .code {
