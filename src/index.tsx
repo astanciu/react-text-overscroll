@@ -1,7 +1,6 @@
 import React from 'react'
 // @ts-ignore
 import styles from './styles.css'
-import { request } from 'https'
 
 type Props = {
   height: string;
@@ -40,17 +39,43 @@ export default class Scroll extends React.Component<Props> {
   }
 
   componentDidMount() {
+    window.addEventListener('resize', this.handleResize)
+
     this.getSizes()
-    if (this.widthDiff > 0) {
-      this.setState({ showEllipsis: true })
-    }
+    // this.addNoWrap();
+    this.getSizes();
     if (this.widthDiff <= 0) {
       this.disabled = true
     }
   }
 
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize = () => {
+    this.resizeParent()
+  }
+
+  resizeParent = () => {
+    console.log(`resizing`);
+    this.removeNoWrap()
+    this.parentWidth = this.getWidth(this.parent.current)
+    this.addNoWrap();
+  }
+
+  addNoWrap = () => {
+    const style = `width: ${this.parentWidth}px; white-space: nowrap;`
+    this.parent.current!.setAttribute('style', style)
+  }
+
+  removeNoWrap = () => {
+    this.parent.current!.setAttribute('style', '')
+  }
+
   getSizes = () => {
     this.parentWidth = this.getWidth(this.parent.current)
+    this.addNoWrap();
     this.childWidth = this.getWidth(this.child.current)
     this.widthDiff = this.childWidth - this.parentWidth
     this.bumper = this.parentWidth * BUMPER_PERCENT

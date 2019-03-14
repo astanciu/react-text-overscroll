@@ -6,10 +6,12 @@
 .innerParent {
   /* border: 1px solid blue; */
   overflow: hidden;
-  white-space: nowrap;
-
-  white-space: nowrap;
+  /* white-space: nowrap; */
   position: relative;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .ellipsis {
