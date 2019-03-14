@@ -23,7 +23,9 @@ import MyComponent from 'react-text-overscroll'
 class Example extends Component {
   render () {
     return (
-      <MyComponent />
+      <div style={{ width: '150px' }}>
+        <OverScroll>Long text that doesn't fit parent width</OverScroll>
+      </div>
     )
   }
 }
