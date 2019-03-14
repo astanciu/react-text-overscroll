@@ -2,8 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #484f5d;
-  color: #b2bbce;
+  background-color: #f8f8f8;
+  color: #353535;
 }
 
 .page {
@@ -15,12 +15,9 @@ body {
 }
 
 .test-container {
-  border: 1px solid #496486;
-  width: 150px;
-  /* display: inline-block;
-  height: 20px; */
+  border: 1px solid #d3d3d3;
   padding: 5px;
-  margin: auto;
+  margin: 20px auto;
   border-radius: 3px;
   text-align: left;
 }

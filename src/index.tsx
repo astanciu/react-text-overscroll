@@ -4,13 +4,17 @@ import styles from './styles.css'
 import { request } from 'https'
 
 type Props = {
-  height: string
+  height: string;
+  speed: number
 }
 
 const BUMPER_PERCENT = 0.25
-const SLIDE_SPEED = 0.05
 
 export default class Scroll extends React.Component<Props> {
+  static defaultProps = {
+    speed: 0.05
+  }
+
   private disabled: boolean = false
   private container: React.RefObject<HTMLDivElement>
   private parent: React.RefObject<HTMLDivElement>
@@ -109,7 +113,8 @@ export default class Scroll extends React.Component<Props> {
     const delta = this.childTarget - this.childPosition
 
     // each "frame" we move by SLIDE_SPEED percent of the distance
-    this.childPosition = this.childPosition + delta * SLIDE_SPEED
+    // TODO: conver this to time based with animation curves
+    this.childPosition = this.childPosition + delta * this.props.speed
     this.setChildPosition(this.childPosition)
 
     // end animation if we're less than 1px away
