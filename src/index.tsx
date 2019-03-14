@@ -1,18 +1,27 @@
 import React from 'react'
+// @ts-ignore
 import styles from './styles.css'
 
-export default class Scroll extends React.Component {
-  disabled:boolean = false
-  offset = 0
-  endGap = 20
-  prevX = undefined
-  start = undefined
-  state = {
+type Props = {
+  height: string;
+}
+
+export default class Scroll extends React.Component<Props> {
+  private disabled: boolean = false
+  private container: React.RefObject<HTMLDivElement>
+  private parent: React.RefObject<HTMLDivElement>
+  private child: React.RefObject<HTMLDivElement>
+  private widthDiff: number = 0
+  private parentWidth: number = 0
+  private childWidth: number = 0
+  private offset: number = 0
+
+  public state = {
     ellipsis: false
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.container = React.createRef()
     this.parent = React.createRef()
     this.child = React.createRef()
@@ -32,45 +41,29 @@ export default class Scroll extends React.Component {
     this.parentWidth = this.getWidth(this.parent.current)
     this.childWidth = this.getWidth(this.child.current)
     this.widthDiff = this.childWidth - this.parentWidth
-
-    // console.log('parentWidth: ', this.parentWidth)
-    // console.log('childWidth: ', this.childWidth)
-    // console.log('widthDiff: ', this.widthDiff)
   }
 
-  getWidth(el) {
+  getWidth(el: HTMLElement | null) {
+    if (!el) throw new Error("Element is null")
     return el.offsetWidth
   }
 
-  onMouseOut = el => {
+  onMouseOut = (event: React.MouseEvent<HTMLInputElement>) => {
     if (this.disabled) return
-    // console.log('out ', el.target)
-    if (el.target !== this.child.current) {
+    if (event.target !== this.child.current) {
       this.resetPosition()
-      this.prevX = undefined
-      this.entryPosition = undefined
-      this.direction = undefined
-      this.prevDirection = undefined
     }
   }
 
-  onMouseMove = el => {
+  onMouseMove = (event: React.MouseEvent<HTMLInputElement>) => {
     // If child already fits, we don't need to do anything
     if (this.disabled) return
     this.getWidths()
 
     // get the local X possition within the parent
     const parent = this.parent.current
-    const parentRect = parent.getBoundingClientRect()
-    const x = el.clientX - parentRect.left // x position within the element.
-
-    // We need to figure out direction so if this is the first event, ignore
-    // and wait for 2nd
-    if (!this.prevX) {
-      this.prevX = x
-      return
-    }
-
+    const parentRect = parent!.getBoundingClientRect()
+    const x = event.clientX - parentRect.left // x position within the element.
 
     // Calculate offset; what local X maps to within bigger child. For ex:
     // if child is 200px wide, and parent is 50, then x of 25 should be 100 in child.
@@ -82,14 +75,14 @@ export default class Scroll extends React.Component {
     this.setPosition(-1 * this.offset)
   }
 
-  setPosition(x) {
+  setPosition(x:number) {
     const y = 0
     const style = `
       -ms-transform: translate(${x}px, ${y}px);]
       -webkit-transform: translate(${x}px, ${y}px);
       transform: translate(${x}px, ${y}px);
     `
-    this.child.current.setAttribute('style', style)
+    this.child.current!.setAttribute('style', style)
   }
 
   resetPosition = () => {
@@ -103,7 +96,10 @@ export default class Scroll extends React.Component {
   }
 
   render() {
-    const parentStyles = {}
+    const parentStyles = {
+      lineHeight: '20px',
+      height: '20px'
+    }
     const height = this.props.height
     if (height) {
       parentStyles.lineHeight = height
@@ -121,7 +117,6 @@ export default class Scroll extends React.Component {
           className={styles.innerParent}
           style={parentStyles}
           ref={this.parent}
-          onMouseOver={this.onMouseOver}
           onMouseMove={this.onMouseMove}
         >
           <div id='scroverflow-child' className={styles.child} ref={this.child}>
