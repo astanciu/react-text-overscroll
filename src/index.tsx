@@ -1,10 +1,14 @@
 import React from 'react'
 // @ts-ignore
 import styles from './styles.css'
+import { request } from 'https'
 
 type Props = {
   height: string
 }
+
+const BUMPER_PERCENT = 0.25
+const SLIDE_SPEED = 0.05
 
 export default class Scroll extends React.Component<Props> {
   private disabled: boolean = false
@@ -15,6 +19,10 @@ export default class Scroll extends React.Component<Props> {
   private parentWidth: number = 0
   private childWidth: number = 0
   private offset: number = 0
+  private childPosition: number = 0
+  private childTarget: number = 0
+  private bumper: number = 0
+  private raf: number | null = null;
 
   public state = {
     ellipsis: false
@@ -28,7 +36,7 @@ export default class Scroll extends React.Component<Props> {
   }
 
   componentDidMount() {
-    this.getWidths()
+    this.getSizes()
     if (this.widthDiff > 0) {
       this.setState({ showEllipsis: true })
     }
@@ -37,10 +45,11 @@ export default class Scroll extends React.Component<Props> {
     }
   }
 
-  getWidths = () => {
+  getSizes = () => {
     this.parentWidth = this.getWidth(this.parent.current)
     this.childWidth = this.getWidth(this.child.current)
     this.widthDiff = this.childWidth - this.parentWidth
+    this.bumper = this.parentWidth * BUMPER_PERCENT
   }
 
   getWidth(el: HTMLElement | null) {
@@ -56,7 +65,8 @@ export default class Scroll extends React.Component<Props> {
   onMouseMove = (event: React.MouseEvent<HTMLInputElement>) => {
     // If child already fits, we don't need to do anything
     if (this.disabled) return
-    this.getWidths()
+
+    this.getSizes()
 
     // get the local X possition within the parent
     const parent = this.parent.current
@@ -65,15 +75,55 @@ export default class Scroll extends React.Component<Props> {
 
     // Calculate offset; what local X maps to within bigger child. For ex:
     // if child is 200px wide, and parent is 50, then x of 25 should be 100 in child.
-    this.offset = this.mapRange(x, 30, this.parentWidth - 30, 0, this.widthDiff)
+    this.offset = this.mapRange(
+      x,
+      this.bumper,
+      this.parentWidth - this.bumper,
+      0,
+      this.widthDiff
+    )
 
+    // Make sure the offset is within bounds
     if (this.offset < 0) this.offset = 0
     if (this.offset > this.widthDiff) this.offset = this.widthDiff
 
-    this.setPosition(-1 * this.offset)
+    // Start child sliding animation to the target offset
+    this.childTarget = -1 * this.offset
+    this.startSlide()
   }
 
-  setPosition(x: number) {
+  // Moves child back to 0
+  resetPosition = () => {
+    this.childTarget = 0
+    this.startSlide()
+  }
+
+  startSlide = () => {
+    // If there's already an animation in progress, don't do anything
+    if (!this.raf) {
+      this.raf = requestAnimationFrame(this.slide)
+    }
+  }
+
+  slide = () => {
+    const delta = this.childTarget - this.childPosition
+
+    // each "frame" we move by SLIDE_SPEED percent of the distance
+    this.childPosition = this.childPosition + delta * SLIDE_SPEED
+    this.setChildPosition(this.childPosition)
+
+    // end animation if we're less than 1px away
+    if (Math.abs(delta) < 1) {
+      cancelAnimationFrame(this.raf!)
+      this.raf = null
+      return
+    }
+
+    // Get next "frame"
+    requestAnimationFrame(this.slide)
+  }
+
+  setChildPosition(x: number) {
     const y = 0
     const style = `
       -ms-transform: translate(${x}px, ${y}px);]
@@ -83,12 +133,8 @@ export default class Scroll extends React.Component<Props> {
     this.child.current!.setAttribute('style', style)
   }
 
-  resetPosition = () => {
-    this.setPosition(0)
-  }
-
   // map value X in range a->b to rage c->d
-  mapRange(x, a, b, c, d) {
+  mapRange(x: number, a: number, b: number, c: number, d: number) {
     let y = (x - a) * ((d - c) / (b - a)) + c
     return y
   }
@@ -103,6 +149,7 @@ export default class Scroll extends React.Component<Props> {
       parentStyles.lineHeight = height
       parentStyles.height = height
     }
+
     return (
       <div
         id='container'
