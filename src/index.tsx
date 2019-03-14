@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './styles.css'
 
 type Props = {
-  height: string;
+  height: string
 }
 
 export default class Scroll extends React.Component<Props> {
@@ -44,15 +44,13 @@ export default class Scroll extends React.Component<Props> {
   }
 
   getWidth(el: HTMLElement | null) {
-    if (!el) throw new Error("Element is null")
+    if (!el) throw new Error('Element is null')
     return el.offsetWidth
   }
 
   onMouseOut = (event: React.MouseEvent<HTMLInputElement>) => {
     if (this.disabled) return
-    if (event.target !== this.child.current) {
-      this.resetPosition()
-    }
+    this.resetPosition()
   }
 
   onMouseMove = (event: React.MouseEvent<HTMLInputElement>) => {
@@ -75,7 +73,7 @@ export default class Scroll extends React.Component<Props> {
     this.setPosition(-1 * this.offset)
   }
 
-  setPosition(x:number) {
+  setPosition(x: number) {
     const y = 0
     const style = `
       -ms-transform: translate(${x}px, ${y}px);]
@@ -109,7 +107,7 @@ export default class Scroll extends React.Component<Props> {
       <div
         id='container'
         className={styles.container}
-        onMouseOut={this.onMouseOut}
+        onMouseLeave={this.onMouseOut}
         ref={this.container}
       >
         <div
