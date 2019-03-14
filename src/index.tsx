@@ -42,8 +42,7 @@ export default class Scroll extends React.Component<Props> {
     window.addEventListener('resize', this.handleResize)
 
     this.getSizes()
-    // this.addNoWrap();
-    this.getSizes();
+    this.resizeParent()
     if (this.widthDiff <= 0) {
       this.disabled = true
     }
